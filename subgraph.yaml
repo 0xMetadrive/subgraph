@@ -1,0 +1,41 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MetadriveFile
+    network: mumbai
+    source:
+      address: "0xeD593046eE9Fd96194342EAAeBD57e9946d98fc2"
+      abi: MetadriveFile
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - Mint
+        - Register
+        - Share
+        - Transfer
+        - Unshare
+      abis:
+        - name: MetadriveFile
+          file: ./abis/MetadriveFile.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Mint(uint256,address,string,string)
+          handler: handleMint
+        - event: Register(address,bytes32)
+          handler: handleRegister
+        - event: Share(uint256,address,string)
+          handler: handleShare
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: Unshare(uint256,address)
+          handler: handleUnshare
+      file: ./src/metadrive-file.ts
