@@ -75,20 +75,24 @@ export class Mint__Params {
     this._event = event;
   }
 
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
   get to(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get tokenId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
   get uri(): string {
-    return this._event.parameters[2].value.toString();
+    return this._event.parameters[3].value.toString();
   }
 
   get fileKey(): string {
-    return this._event.parameters[3].value.toString();
+    return this._event.parameters[4].value.toString();
   }
 }
 
@@ -105,12 +109,16 @@ export class Register__Params {
     this._event = event;
   }
 
-  get addr(): Address {
+  get origin(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
+  get sender(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get publicKey(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+    return this._event.parameters[2].value.toBytes();
   }
 }
 
@@ -127,16 +135,20 @@ export class Share__Params {
     this._event = event;
   }
 
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get owner(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
   get to(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get tokenId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
   get fileKey(): string {
-    return this._event.parameters[2].value.toString();
+    return this._event.parameters[3].value.toString();
   }
 }
 
@@ -179,12 +191,16 @@ export class Unshare__Params {
     this._event = event;
   }
 
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get owner(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
   get to(): Address {
     return this._event.parameters[1].value.toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -600,12 +616,16 @@ export class SafeMintCall__Inputs {
     this._call = call;
   }
 
+  get to(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
   get uri(): string {
-    return this._call.inputValues[0].value.toString();
+    return this._call.inputValues[1].value.toString();
   }
 
   get fileKey(): string {
-    return this._call.inputValues[1].value.toString();
+    return this._call.inputValues[2].value.toString();
   }
 }
 

@@ -1,6 +1,22 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  owner: Bytes! # address
-  approved: Bytes! # address
+type File @entity {
+  id: String!
+  tokenId: BigInt!
+  uri: String!
+  owner: User!
+  fileShares: [FileShare!]! @derivedFrom(field: "file")
+}
+
+type User @entity {
+  id: String!
+  address: Bytes!
+  publicKey: Bytes!
+  filesOwned: [File!]! @derivedFrom(field: "owner")
+  fileShares: [FileShare!]! @derivedFrom(field: "user")
+}
+
+type FileShare @entity {
+  id: String!
+  file: File!
+  user: User!
+  fileKey: String!
 }
