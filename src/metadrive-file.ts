@@ -8,7 +8,7 @@ import {
 } from "../generated/MetadriveFile/MetadriveFile";
 import { User, File, FileShare } from "../generated/schema";
 
-export const handleMint = (event: Mint): void => {
+export function handleMint(event: Mint): void {
   const file = new File(event.params.tokenId.toString());
   file.owner = event.params.to.toHexString();
   file.tokenId = event.params.tokenId;
@@ -20,16 +20,16 @@ export const handleMint = (event: Mint): void => {
   fileShare.user = file.owner;
   fileShare.fileKey = event.params.fileKey;
   fileShare.save();
-};
+}
 
-export const handleRegister = (event: Register): void => {
+export function handleRegister(event: Register): void {
   const user = new User(event.params.origin.toHexString());
   user.address = event.params.origin;
   user.publicKey = event.params.publicKey;
   user.save();
-};
+}
 
-export const handleShare = (event: Share): void => {
+export function handleShare(event: Share): void {
   const fileShare = new FileShare(
     event.params.tokenId.toString() + "-" + event.params.to.toHexString()
   );
@@ -37,7 +37,7 @@ export const handleShare = (event: Share): void => {
   fileShare.user = event.params.to.toHexString();
   fileShare.fileKey = event.params.fileKey;
   fileShare.save();
-};
+}
 
 export function handleTransfer(event: Transfer): void {
   if (event.params.from === Address.zero()) {

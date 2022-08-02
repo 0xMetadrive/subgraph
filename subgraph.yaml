@@ -6,8 +6,9 @@ dataSources:
     name: MetadriveFile
     network: mumbai
     source:
-      address: "0xeD593046eE9Fd96194342EAAeBD57e9946d98fc2"
+      address: "0x4eD57116844256Ad97d9A008af1E1865126a5D9C"
       abi: MetadriveFile
+      startBlock: 27425259
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
